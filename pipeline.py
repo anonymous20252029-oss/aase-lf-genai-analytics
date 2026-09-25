@@ -20,7 +20,7 @@ def run_pipeline():
     plt.rcParams['axes.linewidth'] = 0.8
 
     # Create directories for outputs if they don't exist
-    os.makedirs('data', exist_ok=True)
+    os.makedirs('datasource', exist_ok=True)
     os.makedirs('figures', exist_ok=True)
 
     # 2. Load Data
@@ -103,18 +103,18 @@ def run_pipeline():
         'Metric': ['Week 1 Sample Size', 'Week 7 Sample Size', "Cronbach's Alpha (Likert)", 'KR-20 (120-item Assessment)', 'Quiz Mean Score (out of 120)', 'Quiz Standard Deviation'],
         'Value': [len(df_entry), len(df_w7_raw), f"{alpha_likert:.4f}", f"{kr20_quiz:.4f}", f"{quiz_scores.mean():.2f}", f"{quiz_scores.std():.2f}"]
     })
-    table1.to_csv('data/Table1_Reliability_Summary.csv', index=False)
+    table1.to_csv('datasource/Table1_Reliability_Summary.csv', index=False)
 
     table2 = w1_cluster_df.groupby('Cluster_Name')[['AI_Freq', 'Self_Efficacy', 'Anxiety']].mean().reset_index()
     table2['Count'] = w1_cluster_df['Cluster_Name'].value_counts().values
     table2['Percentage (%)'] = (table2['Count'] / len(w1_cluster_df) * 100).round(1)
-    table2.to_csv('data/Table2_KMeans_Archetypes.csv', index=False)
+    table2.to_csv('datasource/Table2_KMeans_Archetypes.csv', index=False)
 
-    table3 = pd.DataFrame({
+    table3 = pd.datasourceFrame({
         'Parameter': ['Intercept (const)', 'Slope (Likert_Mean)', 'R-squared', 'Pearson r', 'p-value'],
         'Value': [f"{model.params['const']:.4f}", f"{model.params['Likert_Mean']:.4f}", f"{model.rsquared:.4f}", f"{r_p:.4f}", f"{p_p:.4f}"]
     })
-    table3.to_csv('data/Table3_Regression_Model.csv', index=False)
+    table3.to_csv('datasource/Table3_Regression_Model.csv', index=False)
 
     # 7. Generate Figure 1
     fig, axes = plt.subplots(2, 2, figsize=(13, 11))
