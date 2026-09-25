@@ -119,10 +119,10 @@ and JUnit test cases without implementing the target function logic.
 elif option == "3. Instructor Diagnostic Dashboard":
     st.header("📊 Cohort Analytics & Empirical Overview")
 
-    if os.path.exists("data/Table1_Reliability_Summary.csv"):
-        t1 = pd.read_csv("data/Table1_Reliability_Summary.csv")
-        t2 = pd.read_csv("data/Table2_KMeans_Archetypes.csv")
-        t3 = pd.read_csv("data/Table3_Regression_Model.csv")
+    if os.path.exists("datasource/Table1_Reliability_Summary.csv"):
+        t1 = pd.read_csv("datasource/Table1_Reliability_Summary.csv")
+        t2 = pd.read_csv("datasource/Table2_KMeans_Archetypes.csv")
+        t3 = pd.read_csv("datasource/Table3_Regression_Model.csv")
 
         st.subheader("1. Measurement Reliability (Table 1)")
         st.dataframe(t1, use_container_width=True)
@@ -133,19 +133,19 @@ elif option == "3. Instructor Diagnostic Dashboard":
         st.subheader("3. OLS Regression Model (Table 3)")
         st.dataframe(t3, use_container_width=True)
     else:
-        st.warning("Processed CSV data files not found in `/data`. Run `python pipeline.py` first to generate tables.")
+        st.warning("Processed CSV data files not found in `/datasource`. Run `python pipeline.py` first to generate tables.")
 
-    st.subheader("4. Publication Figures")
+    st.subheader("4. Publication figures_")
     fig_col1, fig_col2 = st.columns(2)
 
     with fig_col1:
-        if os.path.exists("figures/Figure1_Empirical_Analysis_300DPI.png"):
-            st.image("figures/Figure1_Empirical_Analysis_300DPI.png", caption="Figure 1: Empirical Evaluation")
+        if os.path.exists("figures_/Figure1_Empirical_Analysis_300DPI.png"):
+            st.image("figures_/Figure1_Empirical_Analysis_300DPI.png", caption="Figure 1: Empirical Evaluation")
         else:
-            st.info("Figure 1 not found in `/figures`.")
+            st.info("Figure 1 not found in `/figures_`.")
 
     with fig_col2:
-        if os.path.exists("figures/Figure2_Item_Difficulty_300DPI.png"):
-            st.image("figures/Figure2_Item_Difficulty_300DPI.png", caption="Figure 2: Item Difficulty Profile")
+        if os.path.exists("figures_/Figure2_Item_Difficulty_300DPI.png"):
+            st.image("figures_/Figure2_Item_Difficulty_300DPI.png", caption="Figure 2: Item Difficulty Profile")
         else:
-            st.info("Figure 2 not found in `/figures`.")
+            st.info("Figure 2 not found in `/figures_`.")
